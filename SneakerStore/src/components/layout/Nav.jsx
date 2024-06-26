@@ -2,33 +2,70 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import IconMenu from "./menu";
 import IconXLg from "./X";
+import { useNavigate } from "react-router-dom";
 import IconPersonFill from "./loginIcon";
+import { decodeToken } from "../../utils/decodeToken";
 const NavLinks = () => {
+  // Kiểm tra xem có access token trong localStorage không
+  const token = localStorage.getItem("access-token");
+  let username = "";
+  const navigate = useNavigate();
+  if (token) {
+    // Nếu có token, giải mã để lấy thông tin user (ví dụ: username)
+    const decodedToken = decodeToken(token);
+    if (decodedToken) {
+      username = decodedToken; // Thay đổi username tùy thuộc vào cấu trúc của token
+    } else {
+      username = "Login";
+    }
+  }
+  const handleNavigate = () => {
+    // Nếu username có dữ liệu, navigate tới Settings
+    if (username) {
+      navigate("/user/setting");
+    } else {
+      // Ngược lại, navigate tới Login
+      navigate("/login");
+    }
+  };
+
   return (
     <>
       <NavLink to="/about" className="hover:cursor-pointer text-md text-white">
         About
       </NavLink>
-      <NavLink
-        to="/login"
+      <span
+        onClick={handleNavigate}
         className="hover:cursor-pointer text-md text-white flex justify-center items-center gap-2"
       >
         <IconPersonFill />
-        Login
-      </NavLink>
+        {username ? username : "Login"}{" "}
+        {/* Thay đổi nội dung dựa vào username */}
+      </span>
     </>
   );
 };
 
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const token = localStorage.getItem("access-token");
+  let username = "";
+
+  if (token) {
+    // Nếu có token, giải mã để lấy thông tin user (ví dụ: username)
+    const decodedToken = decodeToken(token);
+    if (decodedToken) {
+      username = decodedToken; // Thay đổi username tùy thuộc vào cấu trúc của token
+    }
+  }
   const toggleNavBar = () => {
     setIsOpen(!isOpen);
   };
+
   return (
     <>
-      <nav className="flex  justify-center items-center mt-4 ml-10">
-        <div className=" hidden md:flex w-full justify-center gap-[30px]">
+      <nav className="flex justify-center items-center mt-4 ml-10">
+        <div className="hidden md:flex w-full justify-center gap-[30px]">
           <NavLinks />
         </div>
         <div className="md:hidden">
@@ -50,7 +87,8 @@ const Nav = () => {
             className="hover:cursor-pointer text-md text-white flex justify-center items-center gap-2 mr-6"
           >
             <IconPersonFill />
-            Login
+            {username ? username : "Login"}{" "}
+            {/* Thay đổi nội dung dựa vào username */}
           </NavLink>
           <NavLink
             to="/men"

@@ -1,5 +1,5 @@
 import React from "react";
-import { SearchOutlined, SettingOutlined } from "@ant-design/icons";
+import { SearchOutlined } from "@ant-design/icons";
 import { Input } from "antd";
 
 const Search = () => {
