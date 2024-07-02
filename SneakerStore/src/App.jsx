@@ -6,6 +6,8 @@ import Header from "./components/layout/Header";
 import Login from "./containers/public/Home/Login";
 import Setting from "./containers/public/Home/Setting";
 import SignUp from "./containers/public/Home/SignUp";
+import SlideCardProduct from "./components/layout/slideCardProduct";
+import Brands from "./components/layout/Brands";
 import { path } from "./utils/constants";
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
         <Route path={path.LOGIN} element={<Login />} />
         <Route path={path.SIGNUP} element={<SignUp />} />
         <Route path={path.SETTING} element={<Setting />} />
+        <Route path={path.TEST} element={<Brands />} />
       </Routes>
     </Router>
   );

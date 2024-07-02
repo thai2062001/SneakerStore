@@ -3,7 +3,7 @@ import axios from "axios";
 import { path } from "../../utils/constants";
 import { useNavigate } from "react-router-dom";
 import { message } from "antd";
-
+import { useNotification } from "../../components/layout/notification/notifiprovider";
 // Thunk để lấy dữ liệu người dùng từ API
 export const fetchUser = createAsyncThunk("user/fetchUser", async () => {
   const response = await axios.get("http://localhost:3000/users");
@@ -42,21 +42,20 @@ export const loginUser = createAsyncThunk(
       // Lưu token hoặc thông tin người dùng vào localStorage nếu cần thiết
       localStorage.setItem("access-token", response.data.access_token);
       message.success("Login successful!");
-      window.location.href("/home");
-      // Sử dụng navigate để điều hướng người dùng đến trang "/home" sau khi đăng nhập thành công
 
+      // Sử dụng navigate để điều hướng người dùng đến trang "/home" sau khi đăng nhập thành công
       // Hiển thị thông báo thành công
 
       return response.data; // Trả về dữ liệu người dùng hoặc token
     } catch (error) {
       // Xử lý lỗi từ server và hiển thị thông báo lỗi
-      // if (error.response && error.response.data) {
-      //   message.error(error.response.data.message || "Login failed");
-      //   return rejectWithValue(error.response.data);
-      // } else {
-      //   message.error("Login failed. Please try again later.");
-      //   return rejectWithValue(error.message);
-      // }
+      if (error.response && error.response.data) {
+        message.error(error.response.data.message || "Login failed");
+        return rejectWithValue(error.response.data);
+      } else {
+        message.error("Login failed. Please try again later.");
+        return rejectWithValue(error.message);
+      }
     }
   }
 );

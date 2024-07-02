@@ -4,6 +4,7 @@ export const path = {
   HEADER: "/header",
   SIGNUP: "/signup",
   SETTING: "/user/setting",
+  TEST: "/test",
   //ADMIN
 
   //USER

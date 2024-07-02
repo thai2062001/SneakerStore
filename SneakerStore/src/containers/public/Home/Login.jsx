@@ -8,7 +8,8 @@ import Button from "@mui/material/Button";
 import { loginUser } from "../../../features/user/userSlice";
 import { NavLink } from "react-router-dom";
 import { message } from "antd";
-import Loading from "../../../components/layout/Loading/Loading";
+import { useNotification } from "../../../components/layout/notification/notifiprovider";
+
 function Login() {
   const [email, setMail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,16 +20,19 @@ function Login() {
 
     // Kiểm tra các trường bắt buộc
     if (!email || !password) {
-      message.error("Please fill in all required fields.");
+      message("Please fill in all required fields.");
       return;
     }
-
-    // Gọi action creator để dispatch action tạo tài khoản
     try {
-      // Gọi action creator để dispatch action tạo tài khoản
       const response = await dispatch(loginUser({ email, password }));
+      if (response.type === "user/loginUser/fulfilled") {
+        // Đăng nhập thành công, navigate tới trang home
+        navigate("/home");
+      } else {
+        // Đăng nhập thất bại, hiển thị lỗi
+        console.error("Login failed:", response.payload);
+      }
     } catch (error) {
-      // Xử lý lỗi nếu cần thiết
       console.error("Login failed:", error);
     }
 

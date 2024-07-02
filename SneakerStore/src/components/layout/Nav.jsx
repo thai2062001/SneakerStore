@@ -11,7 +11,6 @@ const NavLinks = () => {
   let username = "";
   const navigate = useNavigate();
   if (token) {
-    // Nếu có token, giải mã để lấy thông tin user (ví dụ: username)
     const decodedToken = decodeToken(token);
     if (decodedToken) {
       username = decodedToken; // Thay đổi username tùy thuộc vào cấu trúc của token
