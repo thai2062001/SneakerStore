@@ -6,6 +6,8 @@ import Navbar from "../../../components/layout/Navbar";
 import Footer from "../../../components/layout/Footer";
 import SlideBanner from "../../../components/layout/SlideBanner";
 import Brands from "../../../components/layout/Brands";
+import SlideCardProduct from "../../../components/layout/slideCardProduct";
+import BannerProduct from "../../../components/layout/BannerProduct";
 const Home = () => {
   const dispatch = useDispatch();
   const { user, loading, error } = useSelector((state) => state.user);
@@ -24,6 +26,8 @@ const Home = () => {
       <Navbar />
       <SlideBanner />
       <Brands />
+      <BannerProduct />
+      <SlideCardProduct />
       <h1>No user data available</h1>
       <Footer />
     </div>

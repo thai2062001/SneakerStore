@@ -26,13 +26,16 @@ function Brands() {
   ];
   return (
     <div className="w-full p-2 flex justify-center items-center">
-      <div className="w-full flex justify-center items-center space-x-4 gap-2 sm:gap-8 md:gap-24 ">
+      <div className="w-full flex justify-center items-center flex-wrap space-x-4 gap-2 sm:gap-12 md:gap-24">
         {slide.map((slide, index) => (
-          <div key={index} className="flex-shrink-0 cursor-pointer">
+          <div
+            key={index}
+            className="flex-shrink-0 cursor-pointer transform transition-transform duration-200 hover:scale-110"
+          >
             <img
               src={slide.url}
-              alt={`Brand ${index}`}
-              className="h-12 w-12 md:h-40 md:w-40 object-contain"
+              alt={`Logo of brand ${index}`}
+              className="h-16 w-16 md:h-40 md:w-40 object-contain"
             />
           </div>
         ))}

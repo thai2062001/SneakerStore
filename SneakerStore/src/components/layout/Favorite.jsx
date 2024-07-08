@@ -1,10 +1,10 @@
 import * as React from "react";
 
-function IconHeart(props) {
+function IconHeart({ fill, ...props }) {
   return (
     <svg
       viewBox="0 0 1024 1024"
-      fill="#ffffff"
+      fill={fill}
       height="1.25em"
       width="1.25em"
       {...props}

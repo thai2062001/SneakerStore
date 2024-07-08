@@ -1,10 +1,16 @@
+// src/api.js
 import axios from "axios";
+import { path } from "../utils/constants";
 
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000";
+export const fetchApiAll = async (POINT_END) => {
+  const token = localStorage.getItem("access-token");
 
-export const fetchProducts = async () => {
   try {
-    const response = await axios.get(`${API_URL}/products`);
+    const response = await axios.get(`${path.LOCAL}/${POINT_END}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return response.data;
   } catch (error) {
     console.error("Error fetching products:", error);
@@ -12,4 +18,4 @@ export const fetchProducts = async () => {
   }
 };
 
-// Các hàm gọi API khác
+// Các hàm gọi API khác nếu có

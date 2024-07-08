@@ -25,7 +25,7 @@ const NavLinks = () => {
         </ul>
         <div className="flex h-full gap-[20px] justify-center items-center">
           <button className="text-sm bg-black h-full font-bold text-white hover:border-b-2 hover:border-white transition duration-2000 ease-in-out  focus:outline-none focus:ring-0">
-            <IconHeart className="hover:cursor-pointer" />
+            <IconHeart fill="#ffffff" className="hover:cursor-pointer" />
           </button>
           <button className="text-sm bg-black h-full font-bold text-white hover:border-b-2 hover:border-white transition duration-2000 ease-in-out  focus:outline-none focus:ring-0">
             <IconShoppingCart className="hover:cursor-pointer" />
