@@ -8,7 +8,6 @@ import Button from "@mui/material/Button";
 import { loginUser } from "../../../features/user/userSlice";
 import { NavLink } from "react-router-dom";
 import { message } from "antd";
-import { useNotification } from "../../../components/layout/notification/notifiprovider";
 
 function Login() {
   const [email, setMail] = useState("");

@@ -12,6 +12,7 @@ const initialState = {
 export const fetchStocks = createAsyncThunk("stock/fetchStocks", async () => {
   try {
     const data = await fetchApiAll(path.STOCK_GET_API);
+    console.log(data);
     return data;
   } catch (error) {
     throw Error("Failed to fetch stocks: " + error.message);

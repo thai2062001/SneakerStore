@@ -18,7 +18,6 @@ const Home = () => {
   useEffect(() => {
     setUser(user);
   }, [user]);
-  console.log(user);
 
   return (
     <div>

@@ -1,9 +1,20 @@
 import React, { useState } from "react";
 import { Tag } from "antd";
 import { HeartOutlined, HeartFilled } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 
-function ProductItems({ image_url, name, price, colors, gender }) {
+function ProductItems({ id, image_url, name, price, colors, gender }) {
   const [isHeartFilled, setIsHeartFilled] = useState(false);
+
+  const navigate = useNavigate();
+
+  const uniqueData = colors.filter(
+    (value, index) => colors.indexOf(value) === index
+  );
+
+  const handleClick = () => {
+    navigate(`/products/${id}`);
+  };
 
   const handleHeartClick = () => {
     setIsHeartFilled(!isHeartFilled);
@@ -12,6 +23,7 @@ function ProductItems({ image_url, name, price, colors, gender }) {
   return (
     <div className="relative bg-white flex flex-row w-full sm:w-[260px] sm:flex-col md:flex-col md:w-[260px] rounded-lg cursor-pointer overflow-hidden hover:shadow-md hover:ring-2 hover:ring-black hover:ring-b-2">
       <img
+        onClick={handleClick}
         className="w-[40%] sm:w-full sm:h-52 md:w-full md:h-52 object-cover"
         src={image_url}
         alt={name}
@@ -26,16 +38,19 @@ function ProductItems({ image_url, name, price, colors, gender }) {
           <HeartOutlined style={{ fontSize: "20px" }} />
         )}
       </div>
-      <div className="sm:p-2 md:p-2 p-6 w-[60%] md:w-full sm:w-full">
+      <div
+        onClick={handleClick}
+        className="sm:p-2 md:p-2 p-6 w-[60%] md:w-full sm:w-full"
+      >
         <h3 className="text-lg font-semibold mb-2">{name}</h3>
         <div className="flex flex-row justify-between items-center">
           <Tag>{gender}</Tag>
-          {colors && (
+          {uniqueData && (
             <div className="flex justify-center items-center">
-              {colors.map((color, index) => (
+              {uniqueData.map((color, index) => (
                 <div key={index} className="flex justify-center items-center">
                   <h4>{color}</h4>
-                  {index !== colors.length - 1 && (
+                  {index !== uniqueData.length - 1 && (
                     <span className="text-gray-500 mx-1">/</span>
                   )}
                 </div>

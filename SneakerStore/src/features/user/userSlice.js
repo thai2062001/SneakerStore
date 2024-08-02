@@ -3,7 +3,7 @@ import axios from "axios";
 import { path } from "../../utils/constants";
 import { useNavigate } from "react-router-dom";
 import { message } from "antd";
-import { useNotification } from "../../components/layout/notification/notifiprovider";
+import { notification } from "antd";
 // Thunk để lấy dữ liệu người dùng từ API
 export const fetchUser = createAsyncThunk("user/fetchUser", async () => {
   const response = await axios.get("http://localhost:3000/users");
@@ -18,7 +18,10 @@ export const createUser = createAsyncThunk(
         `http://localhost:3000/${path.CREATE_USER_END_POINT}`,
         userData
       );
-      message.success("Account created successfully!");
+      notification.success({
+        message: "Success",
+        description: "Account created successfully! ",
+      });
       return response.data;
     } catch (error) {
       message.error("Error creating account. Please try again.");
